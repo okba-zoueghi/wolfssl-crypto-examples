@@ -27,7 +27,7 @@ int rsa_sign_ssa_pkcs_v_1_5(RsaKey * rsaKey, const byte * msg, unsigned int msgL
  * @param[in] signatureLen The length of the signature buffer
  * @param[in] hashAlg The hash algorithm to be used (e.g WC_HASH_TYPE_SHA256, WC_HASH_TYPE_SHA384, WC_HASH_TYPE_SHA512)
  *
- * @return The signature size in case of success and a negative value in case of error
+ * @return 0 if the signature is verified successfully and another value otherwise
  */
 int rsa_verify_ssa_pkcs_v_1_5(RsaKey * rsaKey, const byte * msg, unsigned int msgLen,
   byte * signature, unsigned int signatureLen, enum wc_HashType hashAlg);
