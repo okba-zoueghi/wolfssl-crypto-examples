@@ -1,5 +1,5 @@
 #include "rsa_priv_2048.h"
-#include "rsa_sign_ssa_pkcs_v_1_5.h"
+#include "rsa_ssa_pkcs_v_1_5.h"
 
 /* Print out the buffer in C code.
  *
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
     printf("wc_RsaPrivateKeyDecode failed\n");
   }
 
-  ret = rsa_sign_ssa_pkcs_v_1_5(&rsaKey, msg, msgLen, signature, sizeof(signature), WC_HASH_TYPE_SHA256);
+  ret = rsa_sign_ssa_pkcs_v_1_5(&rsaKey, msg, msgLen, signature, sizeof(signature), WC_HASH_TYPE_SHA512);
 
 
   if (ret >= 0)
@@ -93,6 +93,14 @@ int main(int argc, char* argv[])
     printf("\n");
     /* Display binary signature as a buffer */
     print_buffer("rsa_sig_2048", signature, sigLen);
+    printf("\n");
+  }
+
+  ret = rsa_verify_ssa_pkcs_v_1_5(&rsaKey, msg, msgLen, signature, sizeof(signature), WC_HASH_TYPE_SHA512);
+
+  if (ret == 0)
+  {
+    printf("The signature is verified successfully\n");
   }
 
   return ret == 0 ? 0 : 1;
