@@ -75,5 +75,9 @@ int rsa_sign_ssa_pkcs_v_1_5(RsaKey * rsaKey, const byte * msg, unsigned int msgL
 
   ret = wc_RsaSSL_Sign(T, Tsize, signature, signatureLen, rsaKey, &rng);
 
+  free(digest);
+  free(T);
+  wc_FreeRng(&rng);
+
   return ret;
 };
